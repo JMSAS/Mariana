@@ -6,11 +6,11 @@ import { C, clamp, easeInOut, easeOut } from "../theme";
 
 // Tiempos en frames (30 fps). Se reajustan al audio real cuando llegue la grabación.
 const T = {
-  roadDraw: [4, 40],
-  clock: 15,
-  truckIn: [45, 170], // entra despacio y desacelera
-  toShoulder: [140, 178], // se orilla al arcén ("detiene")
-  spot: [176, 205],
+  roadDraw: [2, 30],
+  clock: 8,
+  truckIn: [22, 122], // entra despacio y desacelera
+  toShoulder: [98, 126], // se orilla al arcén: "detiene" (3,9 s)
+  spot: [124, 150],
 };
 
 const TRUCK_SCALE = 1.05;
@@ -35,7 +35,7 @@ export const Noche: React.FC = () => {
   const road = interpolate(frame, T.roadDraw, [1, 0], { ...clamp, easing: easeInOut });
   const sky = interpolate(frame, [8, 30], [0, 1], { ...clamp, easing: easeOut });
   const spot = interpolate(frame, T.spot, [0, 1], { ...clamp, easing: easeInOut });
-  const zoom = interpolate(frame, [170, 345], [1, 1.03], { ...clamp, easing: easeInOut });
+  const zoom = interpolate(frame, [120, 195], [1, 1.03], { ...clamp, easing: easeInOut });
 
   return (
     <AbsoluteFill style={{ overflow: "hidden" }}>
@@ -146,22 +146,22 @@ export const Noche: React.FC = () => {
       </AbsoluteFill>
 
       {/* Palabras clave (no se transcribe todo el diálogo) */}
-      <Strip text="Don Gustavo" start={72} end={168} style={{ left: 110, top: 850 }} />
+      <Strip text="Don Gustavo" start={42} end={112} style={{ left: 110, top: 850 }} />
       <Strip
         text="transportista"
         variant="cream"
-        start={80}
-        end={168}
+        start={50}
+        end={112}
         fontSize={36}
         rotate={1}
         style={{ left: 150, top: 935 }}
       />
-      <Strip text="se detiene" start={182} end={330} style={{ left: 110, top: 850 }} />
+      <Strip text="se detiene" start={118} end={200} style={{ left: 110, top: 850 }} />
       <Strip
         text="a la orilla de la vía"
         variant="cream"
-        start={190}
-        end={330}
+        start={124}
+        end={200}
         fontSize={36}
         rotate={1}
         style={{ left: 150, top: 935 }}

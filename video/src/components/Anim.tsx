@@ -242,3 +242,32 @@ export const Card: React.FC<{
     {children}
   </div>
 );
+
+/** Foto real recortada SIN fondo, con sombra suave (sin alterar la pieza). */
+export const Cutout: React.FC<{ src: string; w: number; rotate?: number; style?: React.CSSProperties }> = ({
+  src,
+  w,
+  rotate = 0,
+  style,
+}) => (
+  <Img
+    src={staticFile(src)}
+    style={{
+      width: w,
+      display: "block",
+      rotate: `${rotate}deg`,
+      filter: "drop-shadow(0 18px 18px rgba(0,0,0,0.45))",
+      ...style,
+    }}
+  />
+);
+
+/** Etiqueta de capítulo (arriba a la derecha). */
+export const Chapter: React.FC<{ n: string; title: string }> = ({ n, title }) => (
+  <In at={4} dx={30} dy={0} mask="left" style={{ right: 60, top: 46 }}>
+    <div style={{ display: "flex", alignItems: "center", gap: 12, fontFamily, fontWeight: 800 }}>
+      <div style={{ background: C.red, color: C.cream, fontSize: 22, padding: "4px 10px" }}>{n}</div>
+      <div style={{ color: C.cream, fontSize: 22, letterSpacing: 3, opacity: 0.9 }}>{title}</div>
+    </div>
+  </In>
+);
