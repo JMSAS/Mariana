@@ -185,11 +185,15 @@ export const Strip: React.FC<{
  * De momento es un marcador de posición: cuando lleguen las grabaciones
  * se reemplaza por el <Video> real.
  */
-export const PresenterWindow: React.FC<{ speaker: "M" | "J" | "both" }> = ({ speaker }) => {
+export type Speaker = "M" | "J" | "both";
+export const PresenterWindow: React.FC<{
+  speaker: Speaker;
+  rect?: { x: number; y: number; w: number; h: number };
+}> = ({ speaker, rect = { x: 1390, y: 730, w: 470, h: 280 } }) => {
   const frame = useCurrentFrame();
   const appear = interpolate(frame, [6, 22], [0, 1], { ...clamp, easing: easeOut });
-  const W = 470;
-  const H = 280;
+  const W = rect.w;
+  const H = rect.h;
   const panel = (who: "M" | "J", name: string) => {
     const active = speaker === "both" || speaker === who;
     return (
@@ -236,8 +240,8 @@ export const PresenterWindow: React.FC<{ speaker: "M" | "J" | "both" }> = ({ spe
     <div
       style={{
         position: "absolute",
-        left: 1390,
-        top: 730,
+        left: rect.x,
+        top: rect.y,
         width: W,
         height: H,
         display: "flex",

@@ -1,6 +1,6 @@
 import React from "react";
 import { AbsoluteFill, interpolate, useCurrentFrame } from "remotion";
-import { Background, Grain, PaperLabel, PresenterWindow, Spotlight, Strip } from "../components/Base";
+import { Background, PaperLabel, Spotlight, Strip } from "../components/Base";
 import { Truck } from "../components/Truck";
 import { C, clamp, easeInOut, easeOut } from "../theme";
 
@@ -23,7 +23,7 @@ const truckX = (f: number) =>
     easing: (t) => 1 - Math.pow(1 - t, 3), // velocidad baja al final, sin rebote
   });
 
-export const Apertura: React.FC = () => {
+export const Noche: React.FC = () => {
   const frame = useCurrentFrame();
 
   const x = truckX(frame);
@@ -167,8 +167,6 @@ export const Apertura: React.FC = () => {
         style={{ left: 150, top: 935 }}
       />
 
-      <PresenterWindow speaker="M" />
-      <Grain />
     </AbsoluteFill>
   );
 };
