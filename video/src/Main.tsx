@@ -48,7 +48,6 @@ const whoAt = (t: number): Who => {
 };
 
 const Panel: React.FC<{ who: Who; active: boolean; name: string; still: string }> = ({ who, active, name, still }) => {
-  const media: React.CSSProperties = { width: "100%", height: "100%", objectFit: "cover", objectPosition: "50% 30%" };
   return (
     <div
       style={{
@@ -61,10 +60,15 @@ const Panel: React.FC<{ who: Who; active: boolean; name: string; still: string }
       }}
     >
       {/* Imagen fija real de la persona cuando no está en cámara */}
-      <Img src={staticFile(still)} style={{ ...media, position: "absolute", filter: active ? undefined : "grayscale(0.6) brightness(0.6)" }} />
+      <Img src={staticFile(still)} style={{ position: "absolute", top: 0, left: "50%", height: "100%", width: "auto", aspectRatio: "16 / 9", translate: "-50% 0", filter: active ? undefined : "grayscale(0.6) brightness(0.6)" }} />
       {ON_CAMERA.filter(([, , w]) => w === who).map(([a, b]) => (
         <Sequence key={a} from={sec(a)} durationInFrames={sec(b) - sec(a)} layout="absolute-fill">
-          <Video src={staticFile("presentadores.mp4")} trimBefore={sec(a)} muted style={media} />
+          <Video
+            src={staticFile("presentadores.mp4")}
+            trimBefore={sec(a)}
+            muted
+            style={{ position: "absolute", top: 0, left: "50%", height: "100%", width: "auto", aspectRatio: "16 / 9", translate: "-50% 0" }}
+          />
         </Sequence>
       ))}
       <div
